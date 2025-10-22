@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-ecommerce
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: ecommerce_db
+      MYSQL_USER: ecom_user
+      MYSQL_PASSWORD: ecompass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: spring-ecommerce
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ecommerce_db
+      SPRING_DATASOURCE_USERNAME: ecom_user
+      SPRING_DATASOURCE_PASSWORD: ecompass
+      DEFAULT_ADMIN_USERNAME: admin
+      DEFAULT_ADMIN_PASSWORD: admin123
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
