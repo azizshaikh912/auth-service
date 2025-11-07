@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ecommerce-db-config
-data:
-  SPRING_DATASOURCE_URL: jdbc:mysql://mysql-0.mysql.default.svc.cluster.local:3306/ecommerce_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
